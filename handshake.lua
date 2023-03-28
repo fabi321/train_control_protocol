@@ -6,6 +6,8 @@ state = 0
 lC = false
 disconnectTimeout = 0
 
+-- Version is used to identify, if the other side uses a similar protocol, in order to avoid conflicting interpretations
+-- of signals. It is chosen to be very unlikely to appear by chance
 VERSION = 1923131
 require("chacha20")
 
