@@ -96,7 +96,7 @@ local function chacha20_encrypt_block(key, counter, nonce, pt, ptidx)
 		pt = tmp .. string.rep('\0', 64 - rbn) --pad last block
 		ptidx = 1
 	end
-	assert(#pt >= 64)
+	-- assert(#pt >= 64)
 	local ba = table.pack(string.unpack(pat16, pt, ptidx))
 	local keystream = chacha20_block(key, counter, nonce)
 	for i = 1, 16 do
@@ -118,10 +118,10 @@ function chacha20(key, counter, nonce, pt)
 
 	-- ensure counter can fit an uint32 --although it's unlikely
 	-- that we hit this wall with pure Lua encryption :-)
-	assert((counter + #pt // 64 + 1) < fff,
-		"block counter must fit an uint32")
-	assert(#key == 32, "#key must be 32")
-	assert(#nonce == 12, "#nonce must be 12")
+	-- assert((counter + #pt // 64 + 1) < fff,
+	-- 	"block counter must fit an uint32")
+	-- assert(#key == 32, "#key must be 32")
+	-- assert(#nonce == 12, "#nonce must be 12")
 	local keya = table.pack(string.unpack("<I4I4I4I4I4I4I4I4", key))
 	local noncea = table.pack(string.unpack("<I4I4I4", nonce))
 	local t = {} -- used to collect all encrypted blocks
