@@ -1,0 +1,31 @@
+{
+    "20": {
+        "name": "acceleration/brake",
+        "sync_newer": true
+    },
+    "21": {
+        "name": "direction",
+        "sync_newer": true,
+        "invert": true
+    },
+    "30": {
+        "name": "passenger doors",
+        "description": "+1 indicates right doors, -1 indicates left doors, 0 indicates no doors",
+        "sync_newer": true,
+        "invert": true
+    },
+    "31": {
+        "name": "passenger light",
+        "sync_newer": true
+    },
+    "32": {
+        "name": "passenger heating",
+        "sync_newer": true
+    },
+    "100": {
+        "name": "car count",
+        "sync": true,
+        "ignore_rear": true,
+        "add": true
+    }
+}

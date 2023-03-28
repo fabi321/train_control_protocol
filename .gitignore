@@ -1,0 +1,6 @@
+.env
+train_controller.xml
+.idea
+.vscode
+.venv
+__pycache__
