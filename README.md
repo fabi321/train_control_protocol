@@ -8,6 +8,7 @@ If you don't want to enforce that coupling cars have to share the key, set `TRUS
 ```shell
 python3 -m virtualenv --creator venv .venv
 . .venv/bin/activate
+pip install -U -r requirements.txt
 cp .env.template .env
 sed -i 's/^KEY=.*/KEY="'"$(python random_keys.py)"'"/' .env
 ```
