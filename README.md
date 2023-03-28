@@ -27,7 +27,8 @@ The idea of this project is to implement a serial communication method to exchan
 
 ## Architecture
 
-It shares a lot of similarities with TCP/IP. Namely there are Switches and Routers, that switch or route messages. Messages are built out of one state channel and one value channel.
+It shares a lot of similarities with TCP/IP. Namely there are Switches and Routers, that switch or route messages.
+Messages are built out of one message type channel and one value channel.
 
 ## Message types
 
