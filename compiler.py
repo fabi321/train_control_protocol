@@ -59,8 +59,6 @@ def minify(text: str) -> str:
 
 def escape(text: str) -> str:
 	return text\
-		.replace('<', '&lt;')\
-		.replace('>', '&gt;')\
 		.replace('&', '&amp;')\
 		.replace('"', '&quot;')\
 		.replace("'", '&apos;')\
