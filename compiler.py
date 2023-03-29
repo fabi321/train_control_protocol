@@ -7,8 +7,8 @@ from typing import Optional
 
 REQUIRE_REGEX: re.Pattern = re.compile(r'''require\(["']([a-zA-Z0-9_]+)["']\)''')
 TEMPLATE_REGEX: re.Pattern = re.compile(r'\{\{([a-zA-Z0-9_]+)\}\}')
-LUA_FILES: list[str] = ['queue.lua', 'bus_switch.lua', 'chacha20.lua', 'handshake.lua', 'router.lua']
-COMPILED: list[str] = ['bus_switch', 'handshake', 'router']
+LUA_FILES: list[str] = ['queue.lua', 'bus_switch.lua', 'chacha20.lua', 'handshake.lua', 'router.lua', 'peripheral_switch.lua']
+COMPILED: list[str] = ['bus_switch', 'handshake', 'router', 'peripheral_switch']
 
 
 class Lib:
@@ -78,21 +78,26 @@ def compile() -> dict[str, str]:
 	return {name: compile_file(lib.snippets[name]) for name in COMPILED}
 
 
-def main():
-	load_dotenv()
-	compiled: dict[str, str] = compile()
-	compiled['protocol'] = parse_json()
-	compiled['trusted_mode'] = (getenv('TRUSTED_MODE') or 'true').lower()
-	assert compiled['trusted_mode'] in ('true', 'false'), 'Only true or false are possible settings for TRUSTED_MODE'
-	with open('hull.xml') as f:
+def process_microcontroller(name: str, compiled: dict[str, str]):
+	with open(f'{name}_hull.xml') as f:
 		hull: str = f.read()
 	while match := TEMPLATE_REGEX.search(hull):
 		required_snippet: Optional[str] = compiled.get(match.group(1))
 		if not required_snippet:
 			raise ModuleNotFoundError(f'Could not find snippet {match.group(1)}')
 		hull = hull[:match.start()] + required_snippet + hull[match.end():]
-	with open('train_controller.xml', 'w') as f:
+	with open(f'{name}.xml', 'w') as f:
 		f.write(hull)
+
+
+def main():
+	load_dotenv()
+	compiled: dict[str, str] = compile()
+	compiled['protocol'] = parse_json()
+	compiled['trusted_mode'] = (getenv('TRUSTED_MODE') or 'true').lower()
+	assert compiled['trusted_mode'] in ('true', 'false'), 'Only true or false are possible settings for TRUSTED_MODE'
+	process_microcontroller('train_controller', compiled)
+	process_microcontroller('peripheral_switch', compiled)
 
 
 if __name__ == "__main__":

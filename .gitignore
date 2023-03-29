@@ -1,5 +1,6 @@
 .env
 train_controller.xml
+peripheral_switch.xml
 .idea
 .vscode
 .venv
