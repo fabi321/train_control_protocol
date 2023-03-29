@@ -8,6 +8,10 @@
         "sync_newer": true,
         "invert": true
     },
+    "22": {
+        "name": "engine",
+        "sync_newer": true
+    },
     "30": {
         "name": "passenger doors",
         "description": "+1 indicates right doors, -1 indicates left doors, 0 indicates no doors",
