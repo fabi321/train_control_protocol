@@ -1,14 +1,19 @@
 import json
+import os
 from subprocess import Popen, PIPE
 from dotenv import load_dotenv
 from os import getenv
 import re
 from typing import Optional
+import sys
+import shutil
+from pathlib import Path
 
 REQUIRE_REGEX: re.Pattern = re.compile(r'''require\(["']([a-zA-Z0-9_]+)["']\)''')
 TEMPLATE_REGEX: re.Pattern = re.compile(r'\{\{([a-zA-Z0-9_]+)\}\}')
 LUA_FILES: list[str] = ['queue.lua', 'bus_switch.lua', 'chacha20.lua', 'handshake.lua', 'router.lua', 'peripheral_switch.lua']
 COMPILED: list[str] = ['bus_switch', 'handshake', 'router', 'peripheral_switch']
+MICROCONTROLLERS: list[str] = ['train_controller', 'peripheral_switch']
 
 
 class Lib:
@@ -90,14 +95,30 @@ def process_microcontroller(name: str, compiled: dict[str, str]):
 		f.write(hull)
 
 
+def install(name: str):
+	copy_dir: Path
+	if sys.platform == 'win32':
+		copy_dir = Path(os.path.expandvars('%APPDATA%'))
+	elif sys.platform == 'linux':
+		copy_dir = Path('~/.steam/steam/steamapps/compatdata/573090/pfx/drive_c/users/steamuser/AppData/Roaming').expanduser()
+	else:
+		raise NotImplementedError('Apple is not supported atm')
+	copy_dir = copy_dir / 'Stormworks' / 'data' / 'microprocessors'
+	shutil.copy(f'{name}.xml', copy_dir)
+	shutil.copy(f'{name}.png', copy_dir)
+
+
 def main():
 	load_dotenv()
+	do_install: bool = len(sys.argv) >= 2 and sys.argv[1] == 'install'
 	compiled: dict[str, str] = compile()
 	compiled['protocol'] = parse_json()
 	compiled['trusted_mode'] = (getenv('TRUSTED_MODE') or 'true').lower()
 	assert compiled['trusted_mode'] in ('true', 'false'), 'Only true or false are possible settings for TRUSTED_MODE'
-	process_microcontroller('train_controller', compiled)
-	process_microcontroller('peripheral_switch', compiled)
+	for mc_name in MICROCONTROLLERS:
+		process_microcontroller(mc_name, compiled)
+		if do_install:
+			install(mc_name)
 
 
 if __name__ == "__main__":
