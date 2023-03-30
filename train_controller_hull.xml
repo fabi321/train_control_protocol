@@ -75,7 +75,7 @@
 				</object>
 			</c>
 			<c type="56">
-				<object id="10" script='{{handshake}}'>
+				<object id="10" script="{{handshake}}">
 					<pos x="2.5" y="0.25"/>
 					<in1 component_id="9"/>
 				</object>
@@ -101,7 +101,7 @@
 			<c type="53">
 				<object id="15">
 					<pos x="6.25"/>
-					<in1 component_id="38"/>
+					<in1 component_id="50"/>
 					<in2 component_id="10"/>
 					<in3 component_id="12"/>
 				</object>
@@ -120,7 +120,7 @@
 				</object>
 			</c>
 			<c type="56">
-				<object id="28" script='{{handshake}}'>
+				<object id="28" script="{{handshake}}">
 					<pos x="2.5" y="-2.75"/>
 					<in1 component_id="27"/>
 				</object>
@@ -146,7 +146,7 @@
 			<c type="53">
 				<object id="32">
 					<pos x="6.25" y="-3"/>
-					<in1 component_id="50"/>
+					<in1 component_id="38"/>
 					<in2 component_id="28"/>
 					<in3 component_id="30"/>
 				</object>
@@ -183,6 +183,7 @@
 				<object id="40">
 					<pos x="2.5" y="-2.25"/>
 					<in1 component_id="41"/>
+					<in2 component_id="30"/>
 				</object>
 			</c>
 			<c type="15">
@@ -231,13 +232,13 @@
 				</object>
 			</c>
 			<c type="31">
-				<object id="66" i="13">
+				<object id="66" i="15">
 					<pos x="2.5" y="1.5"/>
 					<in1 component_id="51"/>
 				</object>
 			</c>
 			<c type="31">
-				<object id="67" i="14">
+				<object id="67" i="16">
 					<pos x="2.5" y="1.25"/>
 					<in1 component_id="51"/>
 				</object>
@@ -263,13 +264,13 @@ end
 				</object>
 			</c>
 			<c type="31">
-				<object id="70" i="15">
+				<object id="70" i="13">
 					<pos x="2.5" y="-1.5"/>
 					<in1 component_id="51"/>
 				</object>
 			</c>
 			<c type="31">
-				<object id="71" i="16">
+				<object id="71" i="14">
 					<pos x="2.5" y="-1.75"/>
 					<in1 component_id="51"/>
 				</object>
@@ -397,7 +398,7 @@ end
 				<in1 component_id="3"/>
 				<in2 component_id="16"/>
 			</c0>
-			<c1 id="10" script='{{handshake}}'>
+			<c1 id="10" script="{{handshake}}">
 				<pos x="2.5" y="0.25"/>
 				<in1 component_id="9"/>
 			</c1>
@@ -415,7 +416,7 @@ end
 			</c4>
 			<c5 id="15">
 				<pos x="6.25"/>
-				<in1 component_id="38"/>
+				<in1 component_id="50"/>
 				<in2 component_id="10"/>
 				<in3 component_id="12"/>
 			</c5>
@@ -428,7 +429,7 @@ end
 				<in1 component_id="22"/>
 				<in2 component_id="16"/>
 			</c7>
-			<c8 id="28" script='{{handshake}}'>
+			<c8 id="28" script="{{handshake}}">
 				<pos x="2.5" y="-2.75"/>
 				<in1 component_id="27"/>
 			</c8>
@@ -446,7 +447,7 @@ end
 			</c11>
 			<c12 id="32">
 				<pos x="6.25" y="-3"/>
-				<in1 component_id="50"/>
+				<in1 component_id="38"/>
 				<in2 component_id="28"/>
 				<in3 component_id="30"/>
 			</c12>
@@ -473,6 +474,7 @@ end
 			<c17 id="40">
 				<pos x="2.5" y="-2.25"/>
 				<in1 component_id="41"/>
+				<in2 component_id="30"/>
 			</c17>
 			<c18 id="41">
 				<pos x="1.25" y="-2"/>
@@ -494,7 +496,7 @@ end
 				<in1 component_id="53"/>
 			</c21>
 			<c22 id="52" n="protocol" v="{{protocol}}">
-ö				<pos x="5" y="4.75"/>
+				<pos x="5" y="4.75"/>
 			</c22>
 			<c23 id="53" count="8" offset="9">
 				<pos x="3.75" y="2.25"/>
@@ -507,11 +509,11 @@ end
 				<in7 component_id="78"/>
 				<in8 component_id="79"/>
 			</c23>
-			<c24 id="66" i="13">
+			<c24 id="66" i="15">
 				<pos x="2.5" y="1.5"/>
 				<in1 component_id="51"/>
 			</c24>
-			<c25 id="67" i="14">
+			<c25 id="67" i="16">
 				<pos x="2.5" y="1.25"/>
 				<in1 component_id="51"/>
 			</c25>
@@ -531,11 +533,11 @@ end
 				<pos x="6.25" y="3.5"/>
 				<in1 component_id="51"/>
 			</c27>
-			<c28 id="70" i="15">
+			<c28 id="70" i="13">
 				<pos x="2.5" y="-1.5"/>
 				<in1 component_id="51"/>
 			</c28>
-			<c29 id="71" i="16">
+			<c29 id="71" i="14">
 				<pos x="2.5" y="-1.75"/>
 				<in1 component_id="51"/>
 			</c29>

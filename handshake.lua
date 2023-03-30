@@ -63,6 +63,7 @@ function onTick()
 		state = state + 1
 	elseif state == 4 then
 		state = 5
+		sn(20, VERSION)
 		if gb(1) then
 			nonce = ""
 			content = ""

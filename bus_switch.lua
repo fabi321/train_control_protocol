@@ -40,6 +40,7 @@ function onTick()
 		else
 			state = 0
 		end
+		state = 5
 	elseif state == 5 then
 		if mc_in_type >= 10 then
 			last_update = tick

@@ -27,6 +27,7 @@ function process(channel_type, input_id)
     elseif current_channel.last_value ~= current_value then
         current_channel.last_value = current_value
         current_channel.poll_interval_done = current_channel.poll_interval
+        output.setNumber(input_id, current_value)
         if current_channel.init == 0 then
             current_channel.init = 1
         else

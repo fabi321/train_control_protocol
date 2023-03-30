@@ -9,14 +9,14 @@ import sys
 import shutil
 from pathlib import Path
 
-REQUIRE_REGEX: re.Pattern = re.compile(r'''require\(["']([a-zA-Z0-9_]+)["']\)''')
-TEMPLATE_REGEX: re.Pattern = re.compile(r'\{\{([a-zA-Z0-9_]+)\}\}')
+REQUIRE_REGEX: re.Pattern = re.compile(r'''require\(["']([a-zA-Z0-9_/]+)["']\)''')
+TEMPLATE_REGEX: re.Pattern = re.compile(r'\{\{([a-zA-Z0-9_/]+)\}\}')
 LUA_FILES: list[str] = [
 	'queue.lua', 'bus_switch.lua', 'chacha20.lua', 'handshake.lua', 'router.lua', 'peripheral_switch.lua',
 	'peripheral_lib.lua', 'peripherals/basic_drive.lua'
 ]
 COMPILED: list[str] = ['bus_switch', 'handshake', 'router', 'peripheral_switch', 'peripherals/basic_drive']
-MICROCONTROLLERS: list[str] = ['train_controller', 'peripheral_switch']
+MICROCONTROLLERS: list[str] = ['train_controller', 'peripheral_switch', 'peripherals/basic_drive']
 
 
 class Lib:

@@ -102,7 +102,7 @@ function onTick()
 	end
 	type = rear_switch_in_type
 	if protocol[type] then
-		value = process(type, fwd_switch_in_value, 4)
+		value = process(type, rear_switch_in_value, 4)
 		fwd_client_pending:pushright({type, value})
 		rear_client_pending:pushright({type, value})
 		state[type] = value
