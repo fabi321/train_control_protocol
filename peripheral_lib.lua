@@ -24,15 +24,15 @@ function process(channel_type, input_id)
     local current_value = input.getNumber(input_id)
     if current_channel.poll_interval_done > 0 then
         current_channel.poll_interval_done = current_channel.poll_interval_done - 1
+    elseif current_channel.poll_interval_done == 0 and current_channel.init == 0 then
+        current_channel.init = 1
+        current_channel.poll_interval_done = current_channel.poll_interval
+        current_channel.last_value = current_value
     elseif current_channel.last_value ~= current_value then
         current_channel.last_value = current_value
         current_channel.poll_interval_done = current_channel.poll_interval
         output.setNumber(input_id, current_value)
-        if current_channel.init == 0 then
-            current_channel.init = 1
-        else
-            pending:pushright({channel_type, current_value})
-        end
+        pending:pushright({channel_type, current_value})
     end
     ---@type number
     local received_type = input.getNumber(31)
