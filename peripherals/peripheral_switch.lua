@@ -1,27 +1,22 @@
-i = input
-o = output
-gn = i.getNumber
-sn = o.setNumber
-
 require("queue")
 
 pending = queue()
 
 -- tumfl: preserve
 function onTick()
-    sn(31, 0)
-    sn(32, 0)
-    if gn(1) >= 10 then
-        pending:pushleft({gn(1), gn(2)})
+    output.setNumber(31, 0)
+    output.setNumber(32, 0)
+    if input.getNumber(1) >= 10 then
+        pending:pushleft({input.getNumber(1), input.getNumber(2)})
     end
     for i=3,31,2 do
-        if gn(i) >= 10 then
-            pending:pushright({gn(i), gn(i + 1)})
+        if input.getNumber(i) >= 10 then
+            pending:pushright({input.getNumber(i), input.getNumber(i + 1)})
         end
     end
     local current = pending:popleft()
     if current ~= nil then
-        sn(31, current[1])
-        sn(32, current[2])
+        output.setNumber(31, current[1])
+        output.setNumber(32, current[2])
     end
 end
