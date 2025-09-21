@@ -7,6 +7,7 @@ require("queue")
 
 pending = queue()
 
+-- tumfl: preserve
 function onTick()
     sn(31, 0)
     sn(32, 0)
@@ -18,7 +19,7 @@ function onTick()
             pending:pushright({gn(i), gn(i + 1)})
         end
     end
-    current = pending:popleft()
+    local current = pending:popleft()
     if current ~= nil then
         sn(31, current[1])
         sn(32, current[2])

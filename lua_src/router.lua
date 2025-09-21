@@ -1,6 +1,3 @@
-i=input;o=output
-gn=i.getNumber;sn=o.setNumber
-
 ---@type string
 proto_desc = property.getText('protocol')
 ---@type table<number, table<string, boolean>>
@@ -31,7 +28,7 @@ require("queue")
 ---@param message_type number
 ---@param value number
 ---@param zone number
----@return number
+---@return number | nil
 function process(message_type, value, zone)
 	local current_proto = protocol[message_type]
 	if current_proto.R and zone == 2 then
@@ -66,61 +63,61 @@ rear_switch_pending = queue()
 fwd_client_pending = queue()
 rear_client_pending = queue()
 
+-- tumfl: preserve
 function onTick()
-	fwd_client_in_type = gn(10)
-	fwd_client_in_value = gn(11)
-	rear_client_in_type = gn(12)
-	rear_client_in_value = gn(13)
-	fwd_switch_in_type = gn(14)
-	fwd_switch_in_value = gn(15)
-	rear_switch_in_type = gn(16)
-	rear_switch_in_value = gn(17)
-	type = fwd_client_in_type
+	local fwd_client_in_type = input.getNumber(10)
+	local fwd_client_in_value = input.getNumber(11)
+	local rear_client_in_type = input.getNumber(12)
+	local rear_client_in_value = input.getNumber(13)
+	local fwd_switch_in_type = input.getNumber(14)
+	local fwd_switch_in_value = input.getNumber(15)
+	local rear_switch_in_type = input.getNumber(16)
+	local rear_switch_in_value = input.getNumber(17)
+	local type = fwd_client_in_type
 	if protocol[type] then
-		value = process(type, fwd_client_in_value, 1)
+		local value = process(type, fwd_client_in_value, 1)
 		fwd_switch_pending:pushright({type, value})
 		rear_switch_pending:pushright({type, value})
 		state[type] = value
 	end
 	type = rear_client_in_type
 	if protocol[type] then
-		value = process(type, rear_client_in_value, 2)
+		local value = process(type, rear_client_in_value, 2)
 		fwd_switch_pending:pushright({type, value})
 		rear_switch_pending:pushright({type, value})
 		state[type] = value
 	end
 	type = fwd_switch_in_type
 	if protocol[type] then
-		value = process(type, fwd_switch_in_value, 3)
+		local value = process(type, fwd_switch_in_value, 3)
 		fwd_client_pending:pushright({type, value})
 		rear_client_pending:pushright({type, value})
 		state[type] = value
 	elseif type == 1 then
-		if value == 100 or value == 101 then
-			update(fwd_switch_pending, value)
+		if fwd_switch_in_value == 100 or fwd_switch_in_value == 101 then
+			update(fwd_switch_pending, fwd_switch_in_value)
 		end
 	end
 	type = rear_switch_in_type
 	if protocol[type] then
-		value = process(type, rear_switch_in_value, 4)
+		local value = process(type, rear_switch_in_value, 4)
 		fwd_client_pending:pushright({type, value})
 		rear_client_pending:pushright({type, value})
 		state[type] = value
 	elseif type == 1 then
-		if value == 100 or value == 101 then
-			update(rear_switch_pending, value)
+		if rear_switch_in_value == 100 or rear_switch_in_value == 101 then
+			update(rear_switch_pending, rear_switch_in_value)
 		end
 	end
-	fwd_client_out_type = 0
-	fwd_client_out_value = 0
-	fwd_client_out_type = 0
-	rear_client_out_type = 0
-	rear_client_out_value = 0
-	fwd_switch_out_type = 0
-	fwd_switch_out_value = 0
-	rear_switch_out_type = 0
-	rear_switch_out_value = 0
-	pending = fwd_client_pending:popleft()
+	local fwd_client_out_type = 0
+	local fwd_client_out_value = 0
+	local rear_client_out_type = 0
+	local rear_client_out_value = 0
+	local fwd_switch_out_type = 0
+	local fwd_switch_out_value = 0
+	local rear_switch_out_type = 0
+	local rear_switch_out_value = 0
+	local pending = fwd_client_pending:popleft()
 	if pending ~= nil then
 		fwd_client_out_type = pending[1]
 		fwd_client_out_value = process(pending[1], pending[2], 5)
@@ -140,12 +137,12 @@ function onTick()
 		rear_switch_out_type = pending[1]
 		rear_switch_out_value = process(pending[1], pending[2], 8)
 	end
-	sn(10, fwd_client_out_type)
-	sn(11, fwd_client_out_value)
-	sn(12, rear_client_out_type)
-	sn(13, rear_client_out_value)
-	sn(14, fwd_switch_out_type)
-	sn(15, fwd_switch_out_value)
-	sn(16, rear_switch_out_type)
-	sn(17, rear_switch_out_value)
+	output.setNumber(10, fwd_client_out_type)
+	output.setNumber(11, fwd_client_out_value)
+	output.setNumber(12, rear_client_out_type)
+	output.setNumber(13, rear_client_out_value)
+	output.setNumber(14, fwd_switch_out_type)
+	output.setNumber(15, fwd_switch_out_value)
+	output.setNumber(16, rear_switch_out_type)
+	output.setNumber(17, rear_switch_out_value)
 end

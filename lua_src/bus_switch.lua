@@ -1,6 +1,3 @@
-i=input;o=output
-gn=i.getNumber;sn=o.setNumber
-
 require("queue")
 
 state = 0
@@ -8,18 +5,18 @@ pending = queue()
 tick = 0
 last_update = -1/0
 
-
+-- tumfl: preserve
 function onTick()
-	tick = tick + 1
-	mc_in_type = gn(10)
-	mc_in_value = gn(11)
-	is_connected = gn(12) == 1
-	in_type = gn(31)
-	in_value = gn(32)
-	mc_out_type = 0
-	mc_out_value = 0
-	out_type = 0
-	out_value = 0
+	local tick = tick + 1
+	local mc_in_type = input.getNumber(10)
+	local mc_in_value = input.getNumber(11)
+	local is_connected = input.getNumber(12) == 1
+	local in_type = input.getNumber(31)
+	local in_value = input.getNumber(32)
+	local mc_out_type = 0
+	local mc_out_value = 0
+	local out_type = 0
+	local out_value = 0
 	if state == 0 then
 		if is_connected then
 			out_type = 1
@@ -61,8 +58,8 @@ function onTick()
 	if not is_connected then
 		state = 0
 	end
-	sn(10, mc_out_type)
-	sn(11, mc_out_value)
-	sn(31, out_type)
-	sn(32, out_value)
+	output.setNumber(10, mc_out_type)
+	output.setNumber(11, mc_out_value)
+	output.setNumber(31, out_type)
+	output.setNumber(32, out_value)
 end
